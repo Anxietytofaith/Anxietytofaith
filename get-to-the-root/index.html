@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Let's Get to the Root</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="manifest" href="./manifest.json" />
+<link rel="icon" href="./favicon-32.png" type="image/png" />
+<link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+<meta name="theme-color" content="#b8a283" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Get to the Root" />
+<meta name="description" content="A three-question companion to From Anxiety to Faith that finds what's really driving the anxiety and answers with Scripture, Alex's notes, and a chapter to go with it." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Public+Sans:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+  /* ---------------------------------------------------------------
+     "Find the Root" — companion quiz for "From Anxiety to Faith"
+     Single deliberately-dark visual world, lifted directly from the
+     book's own cover art and brand kit (ink black / charcoal / warm
+     ivory / warm taupe / muted gold, arch-doorway mark). Not a
+     light/dark toggle — this brand is dark by design, so the palette
+     is declared once, explicitly, and stays put in either host theme.
+     --------------------------------------------------------------- */
+
+  :root {
+    --ink-black: #07070a;
+    --charcoal: #19171a;
+    --charcoal-raised: #221f22;
+    --warm-ivory: #ebe8e6;
+    --warm-taupe: #c5bdb7;
+    --taupe-faint: rgba(197, 189, 183, 0.16);
+    --taupe-faint-2: rgba(197, 189, 183, 0.28);
+    --gold: #b8a283;
+    --gold-bright: #d9c39c;
+    --gold-wash: rgba(184, 162, 131, 0.1);
+    --gold-wash-strong: rgba(184, 162, 131, 0.18);
+    --shadow: rgba(0, 0, 0, 0.45);
+
+    --font-display: "Playfair Display", "Iowan Old Style", "Georgia", serif;
+    --font-quote: "Lora", "Iowan Old Style", "Georgia", serif;
+    --font-ui: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--ink-black);
+    color: var(--warm-ivory);
+  }
+
+  body {
+    font-family: var(--font-ui);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    background:
+      radial-gradient(ellipse 700px 500px at 50% -8%, rgba(184, 162, 131, 0.09), transparent 60%),
+      var(--ink-black);
+  }
+
+  #app {
+    max-width: 600px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 56px 24px 64px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 480px) {
+    #app { padding: 40px 20px 48px; }
+  }
+
+  a { color: var(--gold-bright); }
+
+  /* ---------- Arch mark ---------- */
+
+  .arch-mark {
+    display: block;
+    margin: 0 auto;
+  }
+  .arch-mark circle {
+    fill: none;
+    stroke: var(--taupe-faint-2);
+    stroke-width: 1;
+  }
+  .arch-mark path {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 2.25;
+    stroke-linecap: round;
+  }
+
+  .cover-plate {
+    width: 148px;
+    margin: 0 auto 24px;
+    border: 1px solid var(--gold);
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 20px 44px var(--shadow);
+  }
+  .cover-plate img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .cover-plate-sm {
+    width: 64px;
+    margin: 0 auto 14px;
+    border: 1px solid var(--gold);
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 10px 24px var(--shadow);
+  }
+  .cover-plate-sm img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* ---------- Header / wordmark ---------- */
+
+  .wordmark {
+    text-align: center;
+    margin: 20px 0 4px;
+  }
+  .wordmark .eyebrow {
+    display: block;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--warm-taupe);
+    opacity: 0.75;
+    margin-bottom: 10px;
+  }
+  .wordmark h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-style: normal;
+    font-size: clamp(28px, 7vw, 38px);
+    line-height: 1.12;
+    margin: 0;
+    text-wrap: balance;
+    color: var(--warm-ivory);
+  }
+  .wordmark h1 em {
+    font-style: italic;
+    font-weight: 700;
+    color: var(--gold-bright);
+  }
+
+  /* ---------- Progress ---------- */
+
+  .progress {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 36px 0 8px;
+  }
+  .progress .tick {
+    width: 22px;
+    height: 2px;
+    background: var(--taupe-faint-2);
+    border-radius: 2px;
+    transition: background 0.3s ease;
+  }
+  .progress .tick.done { background: var(--gold); }
+  .progress .tick.current { background: var(--gold-bright); }
+
+  /* ---------- Screens ---------- */
+
+  .screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: rise 0.5s ease both;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .screen, .result-reveal { animation: none !important; }
+  }
+
+  /* ---------- Intro ---------- */
+
+  .intro-copy {
+    font-family: var(--font-quote);
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--warm-taupe);
+    text-align: center;
+    max-width: 46ch;
+    margin: 22px auto 8px;
+  }
+  .intro-copy strong {
+    color: var(--warm-ivory);
+    font-weight: 500;
+  }
+
+  .intro-note {
+    text-align: center;
+    font-size: 13px;
+    color: var(--warm-taupe);
+    opacity: 0.7;
+    margin: 18px 0 0;
+  }
+
+  /* ---------- Buttons ---------- */
+
+  .btn {
+    font-family: var(--font-ui);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--warm-ivory);
+    padding: 15px 28px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn:hover { background: var(--gold-wash); border-color: var(--gold-bright); }
+  .btn:active { transform: scale(0.98); }
+  .btn:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+
+  .btn-primary {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--ink-black);
+  }
+  .btn-primary:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
+
+  .btn-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 34px;
+  }
+
+  .btn-ghost {
+    border-color: transparent;
+    color: var(--warm-taupe);
+    font-weight: 500;
+    padding: 10px 14px;
+  }
+  .btn-ghost:hover { background: transparent; color: var(--warm-ivory); border-color: transparent; }
+
+  /* ---------- Question ---------- */
+
+  .q-label {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 14px;
+  }
+  .q-text {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(21px, 5.5vw, 26px);
+    line-height: 1.3;
+    text-align: center;
+    text-wrap: balance;
+    margin: 0 0 34px;
+    color: var(--warm-ivory);
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .option {
+    font-family: var(--font-ui);
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--warm-ivory);
+    background: var(--charcoal);
+    border: 1px solid var(--taupe-faint);
+    border-radius: 4px;
+    padding: 17px 20px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.12s ease;
+  }
+  .option:hover {
+    border-color: var(--gold);
+    background: var(--charcoal-raised);
+  }
+  .option:active { transform: scale(0.99); }
+  .option:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+
+  .back-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+  }
+
+  /* ---------- Result ---------- */
+
+  .result-reveal { animation: rise 0.6s ease both; }
+
+  .result-arch { margin-bottom: 18px; }
+
+  .result-eyebrow {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--warm-taupe);
+    opacity: 0.8;
+    margin: 0 0 12px;
+  }
+
+  .result-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(25px, 6.5vw, 32px);
+    line-height: 1.25;
+    text-align: center;
+    text-wrap: balance;
+    color: var(--gold-bright);
+    margin: 0 0 30px;
+  }
+
+  .card {
+    background: var(--charcoal);
+    border: 1px solid var(--taupe-faint);
+    border-radius: 6px;
+    padding: 26px 24px;
+    margin-bottom: 18px;
+  }
+
+  .card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 14px;
+  }
+
+  .verse-ref {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--warm-taupe);
+    margin: 0 0 10px;
+  }
+
+  blockquote {
+    margin: 0 0 18px;
+    padding-left: 18px;
+    border-left: 2px solid var(--gold);
+    font-family: var(--font-quote);
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--warm-ivory);
+  }
+
+  .explain {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--warm-taupe);
+    margin: 0;
+  }
+
+  .alt-verses-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--warm-taupe);
+    opacity: 0.85;
+    margin: 0 0 12px;
+  }
+
+  .alt-item {
+    border: 1px solid var(--taupe-faint);
+    border-radius: 5px;
+    background: var(--charcoal);
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .alt-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 15px 18px;
+    cursor: pointer;
+    font-family: var(--font-ui);
+    color: var(--warm-ivory);
+  }
+  .alt-header:hover { background: var(--charcoal-raised); }
+  .alt-header:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: -2px; }
+
+  .alt-header-text .alt-label {
+    display: block;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--warm-ivory);
+  }
+  .alt-header-text .alt-ref {
+    display: block;
+    font-size: 12.5px;
+    color: var(--warm-taupe);
+    margin-top: 2px;
+  }
+
+  .alt-chevron {
+    flex: none;
+    color: var(--gold);
+    font-size: 13px;
+    transition: transform 0.2s ease;
+  }
+  .alt-item.open .alt-chevron { transform: rotate(180deg); }
+
+  .alt-body {
+    display: none;
+    padding: 0 18px 20px;
+  }
+  .alt-item.open .alt-body { display: block; }
+
+  .alt-body blockquote {
+    font-size: 16.5px;
+    margin-bottom: 14px;
+  }
+  .alt-body .explain { font-size: 14.5px; }
+
+  .alt-flag {
+    margin-top: 12px;
+    font-size: 12.5px;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--gold-bright);
+    opacity: 0.9;
+  }
+
+  .author-card {
+    background: var(--gold-wash);
+    border: 1px solid var(--gold-wash-strong);
+    border-left: 3px solid var(--gold);
+  }
+  .author-card .card-label { color: var(--gold-bright); }
+  .author-note {
+    font-family: var(--font-quote);
+    font-style: italic;
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--warm-ivory);
+    margin: 0;
+  }
+  .author-sign {
+    margin-top: 16px;
+    font-family: var(--font-ui);
+    font-style: normal;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+  }
+
+  .chapter-tie {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--warm-taupe);
+    opacity: 0.85;
+    text-align: center;
+    max-width: 42ch;
+    margin: 24px auto 0;
+  }
+  .chapter-tie strong { color: var(--warm-ivory); font-weight: 600; }
+
+  .cta {
+    margin: 34px 0 0;
+    padding: 24px;
+    text-align: center;
+    border-top: 1px solid var(--taupe-faint);
+  }
+  .cta p {
+    font-family: var(--font-quote);
+    font-style: italic;
+    font-size: 15.5px;
+    color: var(--warm-taupe);
+    margin: 0 0 16px;
+  }
+
+  .restart-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--warm-taupe);
+    opacity: 0.55;
+    margin-top: 48px;
+  }
+</style>
+
+
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+  // ---------------------------------------------------------------
+  // Data
+  // ---------------------------------------------------------------
+
+  const QUESTIONS = [
+    {
+      text: "When anxiety shows up, what does it usually sound like in your head?",
+      options: [
+        { label: "You're not doing enough, and you're sure everyone else has already noticed.", scores: { b1: 2, b3: 1 } },
+        { label: "You already know how this ends badly — it's happened before, and it'll happen again.", scores: { b4: 2, b6: 1 } },
+        { label: "You can't let them see you struggling. It would prove you're not enough.", scores: { b3: 2, b1: 1 } },
+        { label: "You're the only one who feels like this — and some part of you is already using that against you.", scores: { b5: 2, b2: 1 } },
+      ],
+    },
+    {
+      text: "What's your instinct when anxiety takes over?",
+      options: [
+        { label: "Work harder. Try to fix it, prove yourself.", scores: { b1: 2, b4: 1 } },
+        { label: "Go quiet. Pull back and handle it alone.", scores: { b5: 2, b6: 1 } },
+        { label: "Replay it. Argue back at yourself, on loop.", scores: { b2: 2, b1: 1 } },
+        { label: "Control every variable so nothing goes wrong.", scores: { b4: 2, b3: 1 } },
+      ],
+    },
+    {
+      text: "If you're honest, what's really underneath most of it?",
+      options: [
+        { label: "You know you should do something about feeling this way, but are too overwhelmed.", scores: { b6: 2, b2: 1 } },
+        { label: "You absolutely cannot let people see or know the real you. They would reject you.", scores: { b3: 2, b5: 1 } },
+        { label: "Your inner voice is your worst critic, you are not on your own team.", scores: { b2: 2, b6: 1 } },
+        { label: "You fear that when you don't control everything — people, outcomes, even timings — everything will fall apart.", scores: { b4: 2, b1: 1 } },
+      ],
+    },
+  ];
+
+  const BUCKETS = ["b1", "b2", "b3", "b4", "b5", "b6"];
+
+  const OUTCOMES = {
+    b1: {
+      title: "The Oppression of Not Feeling That You Are Enough",
+      ref: "2 Corinthians 12:9 (KJV)",
+      verse: "And he said unto me, My grace is sufficient for thee: for my strength is made perfect in weakness. Most gladly therefore will I rather glory in my infirmities, that the power of Christ may rest upon me.",
+      explain: "This one rarely announces itself as fear — it shows up as pressure. A running scorecard that never quite clears, no matter what you finish. It's exhausting in a specific way, because it was never really about the task in front of you. It was about proving something that doesn't have a finish line. What this verse is actually saying is stranger and kinder than it first sounds: the point isn't that you'll eventually be enough on your own. It's that you were never supposed to carry it alone in the first place.",
+      authorNote: "On top of the verse above — we're commanded by Jesus to deny ourselves. This doesn't just mean putting the extra-large pack of crisps down. It's not just denying yourself, it's denying your self — to stop playing the game of being enough in a world that's ultimately corrupt, and holds you to standards that were never even in your best interest. By denying your self, you stop playing this game. You stop being a slave to your self-image, to your imagined perception by others, and to a measurement against goals you probably didn't even set for yourself — society did. After that, you're free to choose something more meaningful. You'll lose the burden of not being “enough,” and gain something else to focus on instead. This can completely and radically change your life.",
+      chapter: "This one runs through the whole book, not just a single scene — Alex has carried it for most of her life, and it's already visible in Chapter 3, three months into a new job, quietly convinced everyone else got instructions she missed.",
+      alternates: [
+        { label: "Option B", ref: "Ephesians 2:8-9 (KJV)", verse: "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God: Not of works, lest any man should boast.", explain: "This one goes at the scorecard itself, not just how tiring it is to keep. If what matters most was never something you could work your way up to in the first place, the running total stops being the point. It's not permission to stop trying at things. It's permission to stop needing the trying to be what makes you acceptable." },
+        { label: "Option C", ref: "Philippians 4:13 (KJV)", verse: "I can do all things through Christ which strengtheneth me.", explain: "This is one of those verses that's easy to skim past because it's so familiar, but it's worth reading slowly for what it doesn't say. It doesn't say you'll always feel capable, or that the pressure disappears. It says the strength isn't something you have to manufacture out of nothing on your own. Not enough on your own was never the requirement." },
+        { label: "From Alex's notes — \u201cdeny yourself\u201d", ref: "Luke 9:23 (KJV)", verse: "And he said to them all, If any man will come after me, let him deny himself, and take up his cross daily, and follow me.", explain: "This one goes a layer deeper than the others. It's not asking you to work harder at feeling adequate, or even to get better at ignoring the scorecard. It's asking you to stop playing the game the scorecard belongs to. Denying yourself here isn't about small self-discipline, it's about stepping outside the whole project of managing your own image — the imagined verdicts of other people, and goals you probably never chose in the first place, most of them handed to you by a standard that was never fair, and was never really in your own interest to chase. Once you're not playing that particular game, \u201cenough\u201d stops being the question being asked. What opens up in its place isn't just relief. It's room for something that actually matters." },
+        { label: "Option E", ref: "Galatians 6:3 (KJV)", verse: "For if a man think himself to be something, when he is nothing, he deceiveth himself.", explain: "This one is the flip side of the encouragement verses above, and it's meant to sting a little. Chasing \u201cenough\u201d quietly assumes the measurement is real and worth winning. This verse says the whole self-assessment, however it comes out, is a kind of self-deception if it's the thing you're building your standing on. It's not an insult. It's a way out. If the scorecard was never accurate to begin with, you're not obligated to keep losing at it, or winning at it either." },
+      ],
+    },
+    b2: {
+      title: "Your Inner Voice Is Constantly Undermining You",
+      ref: "Romans 8:1 (KJV)",
+      verse: "There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit.",
+      explain: "This is the anxiety that talks. Not vague dread — an actual voice, and it's rarely gentle. It knows exactly which old failure to bring up and when. The hard part is that arguing with it usually just proves it right, because now you're anxious about being anxious. What this verse pushes back on isn't the voice's accuracy about your mistakes. It's the sentence it hands down. There's a difference between being told the truth and being condemned, and most of us stopped noticing which one we were living under.",
+      authorNote: "One thing worth knowing, on top of the verse above — there are two very different voices that can sound almost identical from the inside. One is conviction, which is specific, points at something you can actually do something about, and always leaves a door open toward God. The other is condemnation, which is vague, relentless, and never opens a door anywhere, it just keeps you standing in the same spot. Scripture is blunt about where that second voice may come from — it's called “the accuser” for a reason. That doesn't mean every hard thought about yourself is an attack. Much of our thoughts are repetitive and based on our accumulated experience and the various issues we pick up in response to this. Once you start needing people's approval for instance, this is likely to show up over and over and over again until you break the cycle. With this in mind, please remember you're allowed to ask which voice you're actually listening to before you agree with it. You don't have to win an argument with it. You just have to stop assuming it gets the final word by default.",
+      chapter: "This is the scene in Chapter 5, where Alex sits down and finally writes back to that voice instead of just absorbing it.",
+      alternates: [
+        { label: "Option B", ref: "Zephaniah 3:17 (KJV)", verse: "The LORD thy God in the midst of thee is mighty; he will save, he will rejoice over thee with joy; he will rest in his love, he will joy over thee with singing.", explain: "The inner critic and this verse are describing two completely different postures toward the same person: one keeping score, one singing. It's a strange thing to sit with if you're used to the first one — that the actual response to who you are, mistakes included, might be closer to delight than to a verdict." },
+        { label: "Option C", ref: "2 Corinthians 10:5 (KJV)", verse: "Casting down imaginations, and every high thing that exalteth itself against the knowledge of God, and bringing into captivity every thought to the obedience of Christ.", explain: "This one is less about believing something new and more about catching the old voice in the act. Not every thought that arrives in your own voice is telling the truth, and this verse treats that as something you're allowed to actually do something about, not just endure." },
+        { label: "More analytical — Proverbs", ref: "Proverbs 28:26 (KJV)", verse: "He that trusteth in his own heart is a fool: but whoso walketh wisely, he shall be delivered.", explain: "This one is less comfort than diagnosis. The inner critic doesn't work by announcing itself as an opinion, it works by presenting itself as fact, the one voice in the room you have no standing to doubt because it's yours. Proverbs is blunt about that exact error: trusting your own heart uncritically isn't self-knowledge, it's the book's working definition of foolishness. The critic's harshness isn't evidence it's right. Its familiarity is the entire mechanism — you believe it because it sounds like you, not because it is accurate." },
+        { label: "Option E", ref: "Jeremiah 17:9-10 (KJV)", verse: "The heart is deceitful above all things, and desperately wicked: who can know it? I the LORD search the heart, I try the reins, even to give every man according to his ways.", explain: "This one goes further than saying the critic is wrong. It says the heart it claims to speak for isn't a reliable narrator at all, in either direction, harsh or flattering. That's uncomfortable to sit with, because the critic's whole authority rests on sounding like your own honest self-assessment. This verse quietly removes that authority. The accurate verdict was never going to come from interrogating yourself harder. It comes from somewhere that can actually see clearly, which your own heart, by its own nature, can't promise to do." },
+      ],
+    },
+    b3: {
+      title: "Obsession With What Others Think of Us",
+      ref: "Galatians 1:10 (KJV)",
+      verse: "For do I now persuade men, or God? or do I seek to please men? for if I yet pleased men, I should not be the servant of Christ.",
+      explain: "This kind of anxiety runs on an audience. Every room becomes a performance, every silence gets read as a verdict. It's not vanity, it's more like a low-grade trial that never lets out. The exhausting part is that the jury changes constantly, so the verdict you're chasing keeps moving too. This verse isn't telling you to stop caring about people. It's pointing at the actual problem: you cannot fully answer to everyone's opinion and to something steadier than opinion at the same time. One of those has to give.",
+      authorNote: "Here's the part worth sitting with — the fear of man doesn't actually go away when you become more likeable, more successful, or more careful. It goes away when you stop letting an audience hold the final vote on who you are. That audience is also, if you're honest, mostly imagined — most people are far too busy running their own trial to spend long presiding over yours. So this isn't really about people at all. It's about where you've quietly put your court of appeal. You don't have to stop caring what people think to be free of this. You just have to stop needing their verdict to feel settled. Once you're not waiting on it, you get to actually be present with people again, instead of performing for them. Once again, Jesus' advice to deny yourself is critical here. Stop playing a role. Stop being a puppet being controlled by strings that other people hold. Deny all of that.",
+      chapter: "It shows up through the friendships in Chapters 6 and 7 — the ones Alex almost talks herself out of, over what she assumes people are thinking.",
+      alternates: [
+        { label: "Option B", ref: "Proverbs 29:25 (KJV)", verse: "The fear of man bringeth a snare: but whoso putteth his trust in the LORD shall be safe.", explain: "It names the mechanism plainly: caring what people think isn't the trap, it's letting that fear become the thing you organize your decisions around. The word here is snare, something that closes around you without you quite noticing when it happened. The alternative on offer isn't indifference to people. It's having somewhere steadier to stand." },
+        { label: "Option C", ref: "1 Samuel 16:7 (KJV, excerpt)", verse: "For the LORD seeth not as man seeth; for man looketh on the outward appearance, but the LORD looketh on the heart.", explain: "This is from the moment Samuel is about to anoint the obvious choice, the one who looks the part, and gets stopped. What people read off you in a glance was never the whole account, or even the accurate one. There's a kind of relief in a verdict that isn't based on what was visible in the room." },
+        { label: "Option D", ref: "John 12:42-43 (KJV)", verse: "Nevertheless among the chief rulers also many believed on him; but because of the Pharisees they did not confess him, lest they should be put out of the synagogue: For they loved the praise of men more than the praise of God.", explain: "This one doesn't soften the diagnosis. Fearing what people think isn't just an uncomfortable feeling to manage, it's evidence of what's actually being given the final vote in that moment, their opinion instead of God's. That's not meant to pile guilt on top of the fear, it's meant to name the trade being made, because once it's a trade rather than just a feeling, you can ask which side you actually want deciding things. The praise of people is loud, immediate, and never satisfied for long. The alternative is quieter, but it doesn't run out." },
+      ],
+    },
+    b4: {
+      title: "The Need to Control Everything In Order to Feel Safe",
+      ref: "Matthew 6:34 (KJV)",
+      verse: "Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself. Sufficient unto the day is the evil thereof.",
+      explain: "This one lives one step ahead of you, always. It's less a single fear than a habit of pre-living every version of tomorrow, just in case one of them is the bad one. The trouble is it never actually prepares you for anything — it just spends today's energy on a day that hasn't arrived yet. This verse isn't asking you to stop caring what happens next. It's a much smaller, much harder ask: hand over today's portion, and let tomorrow keep its own.",
+      authorNote: "It's worth being honest about what control actually promises you, because it doesn't promise safety, it promises the feeling of safety, and those aren't the same thing. Nobody has ever controlled outcomes, not really — they've only ever controlled how much of today they spent trying to. There's a difference between planning, which is wise and asked of us, and needing to control, which is exhausting and was never on offer in the first place. Letting go of that grip isn't passivity. It shows up in small, practical places — praying “if the Lord will” instead of assuming, doing today's part properly and actually leaving tomorrow's undone. What you get back isn't certainty. It's today, which is the only part you were ever given to hold. Ultimately, all of this will end when we die, so shouldn't we be spending less time worrying about controlling pieces in a game that will ALWAYS end no matter what? We are recommended to not store our treasures on earth, but to seek first the Kingdom of Heaven. By seeking the Kingdom, we focus on what is eternal, what is therefore actually important. As a natural consequence, the grip the world has on us and our psyches loosens.",
+      chapter: "It's woven through most of the book, honestly — but sharpest where Alex tries to plan her way out of feeling unsafe, instead of just being where she is.",
+      alternates: [
+        { label: "Option B", ref: "Proverbs 3:5-6 (KJV)", verse: "Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.", explain: "The hard part of this verse isn't the trusting, it's the leaning not part — the instruction to actually stop running every scenario through your own understanding as if the outcome depends on you catching every possibility. It's not asking you to stop thinking. It's asking you to stop believing your thinking is what's holding everything up." },
+        { label: "Option C", ref: "Isaiah 41:10 (KJV)", verse: "Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness.", explain: "Notice what it doesn't promise: it doesn't say nothing bad will happen. It says you won't be facing whatever does alone, and that there's an actual hand in it, not just a sentiment. For anxiety that lives in the space before something happens, that's a different kind of reassurance than the future turning out fine." },
+        { label: "Option D", ref: "James 4:13-15 (KJV)", verse: "Go to now, ye that say, To day or to morrow we will go into such a city, and continue there a year, and buy and sell, and get gain: Whereas ye know not what shall be on the morrow. For what is your life? It is even a vapour, that appeareth for a little time, and then vanisheth away. For that ye ought to say, If the Lord will, we shall live, and do this, or that.", explain: "This one is less about the anxiety of not controlling the future and more about the quiet assumption underneath it, that planning carefully enough is the same as controlling outcomes. It calls that assumption out directly: your life is a vapour, here and gone, and the plans you're gripping so tightly were never fully yours to guarantee. That's not fatalism. It's just accurate. The phrase it offers instead, if the Lord will, isn't resignation. It's the plan handed back to roughly the size it was always going to be." },
+      ],
+    },
+    b5: {
+      title: "Nobody Can Ever Understand, I'm Alone",
+      ref: "Psalm 34:18 (KJV)",
+      verse: "The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.",
+      explain: "This is the anxiety that isolates itself, quietly. Not because you don't want people, but because it feels safer to manage it alone than to explain it and be misunderstood. So you pull back right when connection would actually help, and the ache gets mistaken for proof that you're built differently — more broken, harder to reach. What this verse says is close to the opposite of what it feels like from inside a broken heart: nearness, not distance, is the actual response to it.",
+      authorNote: "Something worth naming plainly — isolating yourself when you're struggling can feel like self-sufficiency, like you're sparing people the burden of you. But underneath that, it's often something closer to unbelief: a quiet conviction that nobody could actually reach the part you're hiding, or that you have to carry it alone to prove you can handle it. That was never the design. Even Jesus, in His hardest hour, brought people with Him rather than going alone. Staying alone with it feels safer because it avoids the risk of being truly known and maybe misunderstood. But being known, mess and all, is the only way to actually be loved rather than just admired from a distance — and that risk is worth taking. Jesus told us to come as we are. We are enough as we are. We have been chosen. Once you accept this, the feeling of freedom and relief can be overwhelming.",
+      chapter: "It's the good day in Chapter 7 — the hike — that turns anxious right after.",
+      alternates: [
+        { label: "Option B", ref: "Deuteronomy 31:6 (KJV)", verse: "Be strong and of a good courage, fear not, nor be afraid of them: for the LORD thy God, he it is that doth go with thee; he will not fail thee, nor forsake thee.", explain: "This was said to people about to walk into something genuinely frightening, not a hypothetical. The courage it asks for isn't the absence of fear, it's fear with something underneath it. Not being forsaken is a specific promise, not a vague one, and it's worth taking it that literally." },
+        { label: "Option C", ref: "Matthew 28:20 (KJV, excerpt)", verse: "Lo, I am with you alway, even unto the end of the world. Amen.", explain: "It's easy to hear a promise like this as background noise, the kind of line you've heard too many times to actually feel. But isolation runs on the belief that you're managing something alone that other people would misunderstand. This is a direct answer to that belief, not a general comfort." },
+        { label: "Option D — the confrontational one", ref: "Proverbs 18:1 (KJV)", verse: "Through desire a man, having separated himself, seeketh and intermeddleth with all wisdom.", explain: "This is the most confrontational of the six, and worth sitting with rather than dismissing outright. It's not saying the ache is your fault. It's naming a separate, narrower thing: that pulling away can also be its own kind of self-reliance, a preference for your own read on a situation over whatever correction or comfort other people might actually offer. Not every instance of being alone is this. But it's worth asking honestly whether some of it is a choice wearing the costume of a feeling.", flag: "The KJV phrasing here is genuinely awkward to read cold (\u201cseeketh and intermeddleth with all wisdom\u201d isn't self-explanatory). Modern translations render it closer to \u201can unfriendly man pursues selfish ends and defies all sound judgment.\u201d" },
+      ],
+    },
+    b6: {
+      title: "The Anchor of the Past You Drag Along Beside You Every Day",
+      ref: "Matthew 11:28 (KJV)",
+      verse: "Come unto me, all ye that labour and are heavy laden, and I will give you rest.",
+      explain: "Sometimes anxiety isn't about anything happening right now. It's older than that — something from further back that never got put down, so it just gets folded into everything since. It's exhausting in a quiet way, because you're not just carrying today, you're carrying the accumulated weight of every day you didn't fully deal with it. This verse doesn't ask you to explain the weight or justify it. It just says to bring it, as it actually is, and trade it for rest instead of managing it alone.",
+      authorNote: "It's worth being direct about this one — continuing to punish yourself for something already dealt with isn't humility, whatever it feels like from the inside. It's closer to pride: an insistence on finishing a transaction yourself that was already finished, on your behalf, by somebody else. Putting the weight down isn't forgetting it happened, and it isn't pretending it didn't matter. It's trusting that the debt is actually closed, not just deferred. That's a hard thing to practice, because carrying it can start to feel like part of your identity. But you were never meant to build the rest of your life on top of it. You were meant to set it down and build forward from clear ground.",
+      chapter: "Closest to Chapter 8, when the old coping habits creep back in, and to the surrender scene near the end of the book.",
+      alternates: [
+        { label: "Option B", ref: "Psalm 55:22 (KJV)", verse: "Cast thy burden upon the LORD, and he shall sustain thee: he shall never suffer the righteous to be moved.", explain: "Cast isn't a gentle word, it's a throw, something done in one motion rather than gradually set down. That's worth noticing if you're used to carrying things quietly and slowly instead. The weight doesn't have to be earned or explained before it's allowed to be handed over." },
+        { label: "Option C", ref: "2 Corinthians 5:17 (KJV)", verse: "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new.", explain: "This one isn't about the weight itself so much as what happens after you put it down. Old things passing away isn't the same as pretending they didn't happen. It's being told that what's next doesn't have to be built on top of everything that came before it." },
+        { label: "Option D", ref: "Galatians 3:3 (KJV)", verse: "Are ye so foolish? having begun in the Spirit, are ye now made perfect by the flesh?", explain: "This one is aimed at a specific trap: mistaking self-punishment for repentance. If grace already dealt with what you're still carrying, continuing to carry it isn't humility, it's a quiet insistence on finishing the work yourself. Worth naming plainly rather than gently, because it's an easy trap to stay in without ever noticing you're in it. The weight was never meant to be resolved by how long or how hard you carry it. It already was, somewhere else, by somebody else." },
+      ],
+    },
+  };
+
+  // ---------------------------------------------------------------
+  // Scoring — cascading tie-break (verified by exhaustive enumeration
+  // of all 64 answer paths: 0 unresolved ties, all six outcomes reachable)
+  // ---------------------------------------------------------------
+
+  function primaryBucket(option) {
+    let best = null, bestScore = -1;
+    for (const b of BUCKETS) {
+      const s = option.scores[b] || 0;
+      if (s > bestScore) { bestScore = s; best = b; }
+    }
+    return best;
+  }
+
+  function computeOutcome(answerIdxs) {
+    const totals = {};
+    BUCKETS.forEach((b) => (totals[b] = 0));
+    const chosen = answerIdxs.map((idx, qi) => QUESTIONS[qi].options[idx]);
+    chosen.forEach((opt) => { for (const b in opt.scores) totals[b] += opt.scores[b]; });
+
+    let max = -1;
+    BUCKETS.forEach((b) => { if (totals[b] > max) max = totals[b]; });
+    const tied = BUCKETS.filter((b) => totals[b] === max);
+    if (tied.length === 1) return tied[0];
+
+    for (let qi = 2; qi >= 0; qi--) {
+      const pb = primaryBucket(chosen[qi]);
+      if (tied.includes(pb)) return pb;
+    }
+    return tied[0];
+  }
+
+  // ---------------------------------------------------------------
+  // Rendering
+  // ---------------------------------------------------------------
+
+  const app = document.getElementById("app");
+  let step = "intro"; // "intro" | 0 | 1 | 2 | "result"
+  let answers = [];
+
+  function archMark(size) {
+    return `<svg class="arch-mark" width="${size}" height="${size}" viewBox="0 0 120 120" aria-hidden="true">
+      <circle cx="60" cy="60" r="55" />
+      <path d="M40 82 V52 A20 20 0 0 1 80 52 V82" />
+    </svg>`;
+  }
+
+  function progressHTML(current) {
+    const ticks = [0, 1, 2].map((i) => {
+      let cls = "tick";
+      if (i < current) cls += " done";
+      else if (i === current) cls += " current";
+      return `<div class="${cls}"></div>`;
+    }).join("");
+    return `<div class="progress">${ticks}</div>`;
+  }
+
+  function renderIntro() {
+    app.innerHTML = `
+      <div class="screen">
+        <div class="cover-plate"><img src="data:image/jpeg;base64,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" alt="Arch motif from the From Anxiety to Faith cover" /></div>
+        <div class="wordmark">
+          <span class="eyebrow">From Anxiety to Faith</span>
+          <h1>Let&rsquo;s Get to the <em>Root</em></h1>
+        </div>
+        <p class="intro-copy">
+          Anxiety rarely announces what it's actually about. Three short questions,
+          and an honest, faith-based answer at the end — <strong>how faith addresses
+          the root issue</strong>, with verses and Alex's notes to go with it.
+        </p>
+        <p class="intro-note">Takes under a minute. Nothing is saved or sent anywhere.</p>
+        <div class="btn-row">
+          <button class="btn btn-primary" id="start-btn">Begin</button>
+        </div>
+      </div>
+    `;
+    document.getElementById("start-btn").addEventListener("click", () => {
+      step = 0;
+      render();
+    });
+  }
+
+  function renderQuestion(qi) {
+    const q = QUESTIONS[qi];
+    app.innerHTML = `
+      <div class="screen">
+        ${progressHTML(qi)}
+        <div class="q-label">Question ${qi + 1} of 3</div>
+        <h2 class="q-text">${q.text}</h2>
+        <div class="options">
+          ${q.options.map((opt, oi) => `<button class="option" data-idx="${oi}">${opt.label}</button>`).join("")}
+        </div>
+        ${qi > 0 ? `<div class="back-row"><button class="btn btn-ghost" id="back-btn">← Back</button></div>` : ""}
+      </div>
+    `;
+    q.options.forEach((_, oi) => {
+      app.querySelector(`.option[data-idx="${oi}"]`).addEventListener("click", () => {
+        answers[qi] = oi;
+        if (qi < 2) { step = qi + 1; } else { step = "result"; }
+        render();
+      });
+    });
+    if (qi > 0) {
+      document.getElementById("back-btn").addEventListener("click", () => {
+        step = qi - 1;
+        render();
+      });
+    }
+  }
+
+  function altVersesHTML(bucket, alternates) {
+    if (!alternates || !alternates.length) return "";
+    const items = alternates.map((v, i) => `
+      <div class="alt-item" data-alt-id="${bucket}-${i}">
+        <button class="alt-header" data-toggle="${bucket}-${i}">
+          <span class="alt-header-text">
+            <span class="alt-label">${v.label}</span>
+            <span class="alt-ref">${v.ref}</span>
+          </span>
+          <span class="alt-chevron">&#9662;</span>
+        </button>
+        <div class="alt-body">
+          <blockquote>&ldquo;${v.verse}&rdquo;</blockquote>
+          <p class="explain">${v.explain}</p>
+          ${v.flag ? `<p class="alt-flag">${v.flag}</p>` : ""}
+        </div>
+      </div>
+    `).join("");
+    return `
+      <div class="alt-verses">
+        <p class="alt-verses-label">More verses for this one</p>
+        ${items}
+      </div>
+    `;
+  }
+
+  function renderResult() {
+    const bucket = computeOutcome(answers);
+    const o = OUTCOMES[bucket];
+    app.innerHTML = `
+      <div class="screen result-reveal">
+        <div class="result-arch">${archMark(64)}</div>
+        <p class="result-eyebrow">What's likely at the root</p>
+        <h2 class="result-title">${o.title}</h2>
+
+        <div class="card">
+          <p class="card-label">Verse</p>
+          <p class="verse-ref">${o.ref}</p>
+          <blockquote>&ldquo;${o.verse}&rdquo;</blockquote>
+          <p class="explain">${o.explain}</p>
+        </div>
+
+        ${altVersesHTML(bucket, o.alternates)}
+
+        <div class="card author-card">
+          <p class="card-label">Alex's Notes</p>
+          <p class="author-note">${o.authorNote}</p>
+        </div>
+
+        <p class="chapter-tie"><strong>In the book:</strong> ${o.chapter}</p>
+
+        <div class="cta">
+          <div class="cover-plate-sm"><img src="data:image/jpeg;base64,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" alt="From Anxiety to Faith cover art" /></div>
+          <p>This is one thread. The book follows it all the way through.</p>
+          <a class="btn btn-primary" href="https://www.amazon.com/dp/B0HFYPW5Y9" target="_blank" rel="noopener">Read From Anxiety to Faith for Free</a>
+        </div>
+
+        <div class="restart-row">
+          <button class="btn btn-ghost" id="restart-btn">Start again</button>
+        </div>
+
+        <footer>From Anxiety to Faith — a companion, not a diagnosis.</footer>
+      </div>
+    `;
+    document.getElementById("restart-btn").addEventListener("click", () => {
+      step = "intro";
+      answers = [];
+      render();
+    });
+    app.querySelectorAll(".alt-header").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btn.closest(".alt-item").classList.toggle("open");
+      });
+    });
+  }
+
+  function render() {
+    window.scrollTo(0, 0);
+    if (step === "intro") return renderIntro();
+    if (step === "result") return renderResult();
+    return renderQuestion(step);
+  }
+
+  render();
+</script>
+
+
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+    });
+  }
+</script>
+
+</body>
+</html>
